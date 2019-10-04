@@ -1,11 +1,14 @@
 import React from 'react';
+import {connect} from 'react-redux'
+import {removeQuote,upvoteQuote,downvoteQuote} from '../actions/quotes'
 
 const QuoteCard = (props) =>
   <div>
     <div className="card card-inverse card-success card-primary mb-3 text-center">
       <div className="card-block">
         <blockquote className="card-blockquote">
-          {/* <p>{Render Quote Content}</p> */}
+          <p>{props.quote.content}</p>
+          <footer>- author <cite title="Source Title">{props.quote.author}</cite></footer>
           {/* <footer>- author <cite title="Source Title">{Render Quote Author}</cite></footer> */}
         </blockquote>
       </div>
@@ -14,25 +17,36 @@ const QuoteCard = (props) =>
           <button
             type="button"
             className="btn btn-primary"
+            // onClick={()=>props.dispatch(upvoteQuote(props.quote.id))}
           >
             Upvote
           </button>
           <button
             type="button"
             className="btn btn-secondary"
+            // onClick={()=>props.upvoteQuote(props.quote.id)}
           >
             Downvote
           </button>
           <button
             type="button"
             className="btn btn-danger"
+            // onClick={()=>props.upvoteQuote(props.quote.id)}
           >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <div>Votes: {props.quote.votes}</div>
         {/* <div>Votes: {Render Quote Votes}</div> */}
       </div>
     </div>
   </div>;
+//
+// const mapDispatchToProps = dispatch => ({
+//     upvoteQuote: id=>dispatch(upvoteQuote(id))
+//     downvoteQuote: id=>dispatch(downvoteQuote(id))
+//     removeQuote: id=>dispatch(removeQuote(id))
+// })
 
-export default QuoteCard;
+// export default connect(null,{upvoteQuote,downvoteQuote,removeQuote})(QuoteCard);
+export default connect()(QuoteCard);
